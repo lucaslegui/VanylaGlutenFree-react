@@ -1,0 +1,32 @@
+body {
+    background-color: #fdfdfe;
+    color: #333;
+    font-family: Arial, sans-serif;
+  }
+  
+  .navbar {
+    background-color: #ffe4e1;
+  }
+  
+  .navbar-brand, .nav-link {
+    color: #5f9ea0 !important;
+  }
+  
+  h1 {
+    color: #4682b4;
+  }
+  
+  p {
+    color: #696969;
+  }
+  
+  .btn-outline-secondary {
+    color: #4682b4;
+    border-color: #4682b4;
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #4682b4;
+    color: #fff;
+  }
+  

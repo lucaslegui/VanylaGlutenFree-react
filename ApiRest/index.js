@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import {connectDB} from './config/db.js';
+import cors from 'cors';
 
 dotenv.config({ path: './.env' });
 
@@ -9,6 +10,14 @@ connectDB();
 
 const app = express();
 
+
+// Configuración de CORS
+app.use(cors({
+    origin: 'http://localhost:5173', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+  }));
+  
 // parser middleware
 app.use(express.json());
 
@@ -27,4 +36,4 @@ app.use('/api/recipes', recipeRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server is corriendo at port ${PORT}`));

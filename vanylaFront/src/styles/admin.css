@@ -1,0 +1,29 @@
+.admin-container {
+  display: flex;
+}
+
+.admin-panel {
+  width: 200px;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.admin-panel ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.admin-panel li {
+  margin-bottom: 10px;
+}
+
+.admin-panel a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.admin-content {
+  flex-grow: 1;
+  padding: 20px;
+}

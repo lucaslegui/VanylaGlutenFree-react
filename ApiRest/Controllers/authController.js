@@ -1,4 +1,4 @@
-import User from '../models/User.js';
+import User from '../Models/User.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
@@ -62,6 +62,7 @@ export const login = async (req, res) => {
         const payload = {
             user: {
                 id: user.id,
+                role: user.role,
             },
         };
 
@@ -73,7 +74,7 @@ export const login = async (req, res) => {
             },
             (err, token) => {
                 if (err) throw err;
-                res.json({ token });
+                res.json({ token, user: { id: user.id, name: user.name, email: user.email, role: user.role } });
             }
         );
     } catch (err) {
