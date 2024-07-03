@@ -1,40 +1,30 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Products from './pages/CRUD/Products';
-import Courses from './pages/CRUD/Courses';
-import Tips from './pages/CRUD/Tips';
-import Recipes from './pages/CRUD/Recipes';
-import Admin from './pages/CRUD/Admin';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Navbar from './components/Navbar';
-import PrivateRoute from './components/PrivateRoute';
-import { useAuth } from './context/AuthContext';
+import React from "react";
+import {Routes, Route} from "react-router-dom";
+import {AuthContextProvider} from "./context/AuthContext";
+import Navbar from "./components/Navbar.jsx";
+import {Home, Register, Login, UsersTable} from "./pages/index.js";
+import ProtectedRoutes from "./utils/ProtectedRoutes.jsx";
 
-const App = () => {
-  const { user } = useAuth();
 
+
+function App() {
   return (
-    <div>
+    <>
+        <AuthContextProvider>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/tips" element={<Tips />} />
-        <Route path="/recipes" element={<Recipes />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        {user?.role === 'admin' && (
-          <>
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/users" element={<Admin />} />
-          </>
-        )}
-      </Routes>
-    </div>
+        <Routes>
+            <Route element={<ProtectedRoutes />}>
+            <Route path="/" element={<Home />} />
+            </Route>
+
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/users" element={<UsersTable />} />
+        </Routes>
+
+        </AuthContextProvider>
+    </>
   );
-};
+}
 
 export default App;

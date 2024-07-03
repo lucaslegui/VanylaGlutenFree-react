@@ -2,31 +2,48 @@ body {
     background-color: #fdfdfe;
     color: #333;
     font-family: Arial, sans-serif;
-  }
-  
-  .navbar {
-    background-color: #ffe4e1;
-  }
-  
-  .navbar-brand, .nav-link {
-    color: #5f9ea0 !important;
-  }
-  
-  h1 {
+}
+
+h1 {
     color: #4682b4;
-  }
-  
-  p {
+}
+
+p {
     color: #696969;
-  }
-  
-  .btn-outline-secondary {
+}
+
+.btn-outline-secondary {
     color: #4682b4;
     border-color: #4682b4;
-  }
-  
-  .btn-outline-secondary:hover {
+}
+
+.btn-outline-secondary:hover {
     background-color: #4682b4;
     color: #fff;
-  }
+}
+
+/*navbar*/
+.navbar-custom {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: #6c757d;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-custom .nav-link:hover {
+    color: #495057;
+}
+
+.navbar-custom .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke='rgba(108, 117, 125, 0.7)' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+}
+
+.navbar-custom .navbar-collapse {
+    justify-content: flex-end;
+}
+
   

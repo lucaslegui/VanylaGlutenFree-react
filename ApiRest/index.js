@@ -13,7 +13,7 @@ const app = express();
 
 // Configuración de CORS
 app.use(cors({
-    origin: 'http://localhost:5173', 
+    origin: 'http://localhost:5173',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
   }));
@@ -22,13 +22,15 @@ app.use(cors({
 app.use(express.json());
 
 // Rutas
-import authRoutes from './routes/authRoutes.js';
-import productRoutes from './routes/productRoutes.js';
-import courseRoutes from './routes/courseRoutes.js';
-import tipRoutes from './routes/tipRoutes.js';
-import recipeRoutes from './routes/recipeRoutes.js';
+import authRoutes from './Routes/authRoutes.js';
+import userRoutes from './Routes/userRoutes.js';
+import productRoutes from './Routes/productRoutes.js';
+import courseRoutes from './Routes/courseRoutes.js';
+import tipRoutes from './Routes/tipRoutes.js';
+import recipeRoutes from './Routes/recipeRoutes.js';
 
 app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/tips', tipRoutes);
