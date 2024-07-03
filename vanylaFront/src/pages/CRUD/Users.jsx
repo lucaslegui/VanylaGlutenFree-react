@@ -7,6 +7,7 @@ const Users = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await axios.get('/api/users');
+    };
 
     fetchUsers();
   }, []);

@@ -1,28 +1,39 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import Products from './pages/CRUD/Products';
+import Courses from './pages/CRUD/Courses';
+import Tips from './pages/CRUD/Tips';
+import Recipes from './pages/CRUD/Recipes';
+import Admin from './pages/CRUD/Admin';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Admin from './pages/Admin';
+import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
-import './styles/main.css';
-import './styles/admin.css';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import { useAuth } from './context/AuthContext';
 
 const App = () => {
+  const { user } = useAuth();
+
   return (
-    <Router>
+    <div>
       <Navbar />
-      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/courses" element={<Courses />} />
+        <Route path="/tips" element={<Tips />} />
+        <Route path="/recipes" element={<Recipes />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/admin/*" element={<PrivateRoute role="admin"><Admin /></PrivateRoute>} />
+        {user?.role === 'admin' && (
+          <>
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/users" element={<Admin />} />
+          </>
+        )}
       </Routes>
-    </Router>
+    </div>
   );
 };
 
