@@ -23,6 +23,9 @@ export const register = async (req, res) => {
         const payload = {
             user: {
                 id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
             },
         };
 
@@ -62,6 +65,8 @@ export const login = async (req, res) => {
         const payload = {
             user: {
                 id: user.id,
+                name: user.name,
+                email: user.email,
                 role: user.role,
             },
         };
@@ -82,3 +87,4 @@ export const login = async (req, res) => {
         res.status(500).send('Error en el servidor');
     }
 };
+

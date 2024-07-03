@@ -1,59 +1,52 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import api from '../api/axios';
-import { useAuth } from '../context/AuthContext';
-import { toast } from 'react-toastify';
+import React, {useState, useContext} from "react";
+import axios from "../api/axios.js";
+import {toast} from "react-toastify";
+import {AuthContext} from "../context/AuthContext.jsx";
+import {useNavigate} from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
-  const { login } = useAuth();
+    const [userData, setUserData] = useState({
+        email: "",
+        password: "",
+    });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await api.post('/auth/login', { email, password });
-      login(response.data.user);
-      localStorage.setItem('token', response.data.token);
-      toast.success('Inicio de sesión exitoso');
-      navigate('/');
-    } catch (err) {
-      setError('Invalid email or password');
-      toast.error('Error al iniciar sesión');
-    }
-  };
+    const {setUser} = useContext(AuthContext)
+    const navigate = useNavigate();
 
-  return (
-    <div className="container mt-5">
-      <h1>Login</h1>
-      {error && <div className="alert alert-danger">{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label className="form-label">Email</label>
-          <input
-            type="email"
-            className="form-control"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post("/auth/login", userData);
+            console.log(res.data);
+            setUser(res.data.user);
+            Cookies.set("token", res.data.token, {expires: 3});
+            toast.success("Inicio de sesión exitoso")
+            navigate("/");
+        } catch (err) {
+            console.log(err);
+            toast.error("Error al iniciar sesión")
+        }
+    };
+
+    return (
+        <div className="container">
+            <h1>Iniciar Sesión</h1>
+            <form onSubmit={handleLogin}>
+                <div className="mb-3">
+                    <label htmlFor="email" className="form-label">Correo Electrónico</label>
+                    <input type="email" className="form-control" id="email" value={userData.email}
+                           onChange={(e) => setUserData({...userData, email: e.target.value})}/>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="password" className="form-label">Contraseña</label>
+                    <input type="password" className="form-control" id="password" value={userData.password}
+                           onChange={(e) => setUserData({...userData, password: e.target.value})}/>
+                </div>
+                <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
+            </form>
         </div>
-        <div className="mb-3">
-          <label className="form-label">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">Login</button>
-      </form>
-    </div>
-  );
+    );
 };
 
-export default Login;
+export {Login};
