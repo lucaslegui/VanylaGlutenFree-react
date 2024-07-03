@@ -1,13 +1,14 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {AuthContext} from "../../context/AuthContext";
-
-
 import axios from "../../api/axios.js";
+import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 const UsersTable = () => {
     const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState([]);
+    const [loading, setLoading] = useState(true);
     const {auth} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
@@ -24,6 +25,22 @@ const UsersTable = () => {
 
     }, [])
 
+    const deleteUser = (id) => {
+        axios.delete(`/users/${id}`, {headers: {'token': auth}})
+            .then((res) => {
+                console.log(res.data);
+                setUsers(users.filter((user) => user._id !== id));
+                toast("Usuario eliminado")
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    const editUser = (id) => {
+        console.log(id);
+        navigate(`/editUser/${id}`);
+    };
 
     return (
         <>
@@ -50,8 +67,9 @@ const UsersTable = () => {
                             <td>{user.email}</td>
                             <td>{user.role}</td>
                             <td>
-                                <button className="btn btn-primary">Editar</button>
-                                <button className="btn btn-danger">Eliminar</button>
+                                <button className="btn btn-primary" onClick={() => editUser(user._id)}>Editar</button>
+                                <button className="btn btn-danger" onClick={() => deleteUser(user._id)}>Eliminar
+                                </button>
                             </td>
                         </tr>
                     ))}
