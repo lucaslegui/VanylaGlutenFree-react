@@ -4,6 +4,7 @@ import {
     createProduct,
     updateProduct,
     deleteProduct,
+    getProductById
 } from '../controllers/productController.js';
 import authMiddleware from '../middlewares/authMiddleware.js';
 import roleMiddleware from '../middlewares/roleMiddleware.js';
@@ -12,6 +13,9 @@ const router = express.Router();
 
 // Get all products
 router.get('/', getProducts);
+
+// get product by id
+router.get('/:id', getProductById);
 
 // Create new product
 router.post('/', authMiddleware, roleMiddleware(['admin']), createProduct);

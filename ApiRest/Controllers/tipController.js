@@ -58,7 +58,7 @@ export const deleteTip = async (req, res) => {
             return res.status(404).json({ msg: 'Consejo no encontrado' });
         }
 
-        await Tip.findByIdAndRemove(req.params.id);
+        await Tip.findByIdAndDelete(req.params.id);
 
         res.json({ msg: 'Consejo eliminado' });
     } catch (err) {

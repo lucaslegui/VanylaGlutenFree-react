@@ -21,10 +21,16 @@ const Navbar = () => {
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to='/'>HOME</NavLink>
                                 </li>
-                                {user && user.role === 'admin' && <li className="nav-item">
-                                    <NavLink className="nav-link" to='/users'>USERS</NavLink>
-                                </li>}
-
+                                {user && user.role === 'admin' && (
+                                    <>
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link" to='/users'>USERS</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link" to='/productsList'>PRODUCTOS</NavLink>
+                                        </li>
+                                    </>
+                                )}
                                 {!user && <>
                                     <li className="nav-item">
                                         <NavLink className="nav-link" to='/login'>LOGIN</NavLink>

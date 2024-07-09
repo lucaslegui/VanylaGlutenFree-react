@@ -10,8 +10,24 @@ export const getProducts = async (req, res) => {
     }
 };
 
+export const getProductById = async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+
+        if (!product) {
+            return res.status(404).json({msg: 'Producto no encontrado'});
+        }
+
+        res.json(product);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Error en el servidor');
+    }
+};
+
+
 export const createProduct = async (req, res) => {
-    const { name, description, category, price, image, availability } = req.body;
+    const {name, description, category, price, image, availability} = req.body;
 
     try {
         const newProduct = new Product({
@@ -32,19 +48,19 @@ export const createProduct = async (req, res) => {
 };
 
 export const updateProduct = async (req, res) => {
-    const { name, description, category, price, image, availability } = req.body;
+    const {name, description, category, price, image, availability} = req.body;
 
     try {
         let product = await Product.findById(req.params.id);
 
         if (!product) {
-            return res.status(404).json({ msg: 'Producto no encontrado' });
+            return res.status(404).json({msg: 'Producto no encontrado'});
         }
 
         product = await Product.findByIdAndUpdate(
             req.params.id,
-            { $set: { name, description, category, price, image, availability } },
-            { new: true }
+            {$set: {name, description, category, price, image, availability}},
+            {new: true}
         );
 
         res.json(product);
@@ -59,12 +75,12 @@ export const deleteProduct = async (req, res) => {
         let product = await Product.findById(req.params.id);
 
         if (!product) {
-            return res.status(404).json({ msg: 'Producto no encontrado' });
+            return res.status(404).json({msg: 'Producto no encontrado'});
         }
 
-        await Product.findByIdAndRemove(req.params.id);
+        await Product.findByIdAndDelete(req.params.id);
 
-        res.json({ msg: 'Producto eliminado' });
+        res.json({msg: 'Producto eliminado'});
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Error en el servidor');
