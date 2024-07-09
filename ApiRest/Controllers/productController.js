@@ -1,5 +1,6 @@
 import Product from '../models/Product.js';
 
+
 export const getProducts = async (req, res) => {
     try {
         const products = await Product.find();
@@ -39,6 +40,11 @@ export const createProduct = async (req, res) => {
             availability,
         });
 
+        if(req.file){
+            const { filename } = req.file;
+            newProduct.setImgUrl(filename);
+        }
+
         const product = await newProduct.save();
         res.json(product);
     } catch (err) {
@@ -62,6 +68,13 @@ export const updateProduct = async (req, res) => {
             {$set: {name, description, category, price, image, availability}},
             {new: true}
         );
+
+        if (req.file) {
+            const { filename } = req.file;
+            product.setImgUrl(filename);
+        }
+
+        await product.save();
 
         res.json(product);
     } catch (err) {

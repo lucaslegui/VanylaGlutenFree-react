@@ -17,6 +17,8 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
   }));
+
+app.use('/public', express.static('storage/imgs'));
   
 // parser middleware
 app.use(express.json());

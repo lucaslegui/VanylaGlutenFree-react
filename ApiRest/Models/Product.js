@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+// import cors from "../Config/cors.js";
+
 const ProductSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -27,5 +29,9 @@ const ProductSchema = new mongoose.Schema({
         default: true,
     },
 });
+
+ProductSchema.methods.setImgUrl = function setImgUrl(filename) {
+    this.image = `http://localhost:3000/public/${filename}`;
+}
 
 export default mongoose.model('Product', ProductSchema);
