@@ -7,10 +7,12 @@ const Navbar = () => {
     return (
         <>
             <header>
-                {user?.name ? <h1>Hola, {user.name}</h1> : <p>no estas logueado</p>}
                 <nav className="navbar navbar-expand-lg navbar-custom">
                     <div className="container-fluid">
-                        <a className="navbar-brand" href="#">Navbar</a>
+                        <a className="navbar-brand" href="/">
+                            <img src='./assets/img/logo_fondo.png' alt="logo" width="90" height="90" className='logo'/>
+                        </a>
+                {user?.name ? <p>Hola, {user.name}</p> : <p>no estas logueado</p>}
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                                 aria-label="Toggle navigation">
@@ -29,11 +31,17 @@ const Navbar = () => {
                                         <li className="nav-item">
                                             <NavLink className="nav-link" to='/productsList'>PRODUCTOS</NavLink>
                                         </li>
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link" to='/recipes'>RECETAS</NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link" to='/courses'>CURSOS</NavLink>
+                                        </li>
                                     </>
                                 )}
                                 {!user && <>
                                     <li className="nav-item">
-                                        <NavLink className="nav-link" to='/login'>LOGIN</NavLink>
+                                    <NavLink className="nav-link" to='/login'>LOGIN</NavLink>
                                     </li>
                                     <li className="nav-item">
                                         <NavLink className="nav-link" to='/register'>REGISTER</NavLink>

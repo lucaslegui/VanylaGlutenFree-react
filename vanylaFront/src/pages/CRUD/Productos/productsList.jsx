@@ -28,7 +28,7 @@ const ProductsList = () => {
                 toast('Producto eliminado');
             })
             .catch((error) => {
-                console.error('Error deleting product:', error);
+                console.error('Error', error);
                 toast.error('Error al eliminar el producto');
             });
     }

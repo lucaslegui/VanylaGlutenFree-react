@@ -1,6 +1,7 @@
 import express from 'express';
 import {
     getCourses,
+    getCourse,
     createCourse,
     updateCourse,
     deleteCourse,
@@ -12,6 +13,9 @@ const router = express.Router();
 
 // Get all courses
 router.get('/', getCourses);
+
+// Get course by id
+router.get('/:id', getCourse);
 
 // Create new course
 router.post('/', authMiddleware, roleMiddleware(['admin']), createCourse);

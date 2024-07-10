@@ -18,4 +18,8 @@ const RecipeSchema = new mongoose.Schema({
     },
 });
 
+RecipeSchema.methods.setImgUrl = function setImgUrl(filename) {
+    this.image = `http://localhost:3000/public/${filename}`;
+}
+
 export default mongoose.model('Recipe', RecipeSchema);

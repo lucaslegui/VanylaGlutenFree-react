@@ -10,6 +10,22 @@ export const getRecipes = async (req, res) => {
     }
 };
 
+export const getRecipeById = async (req, res) => {
+    try {
+        const recipe = await Recipe.findById(req.params.id);
+
+        if (!recipe) {
+            return res.status(404).json({ msg: 'Receta no encontrada' });
+        }
+
+        res.json(recipe);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Error en el servidor');
+    }
+
+};
+
 export const createRecipe = async (req, res) => {
     const { title, ingredients, steps, image } = req.body;
 
@@ -20,6 +36,11 @@ export const createRecipe = async (req, res) => {
             steps,
             image,
         });
+
+        if(req.file){
+            const { filename } = req.file;
+            newRecipe.setImgUrl(filename);
+        }
 
         const recipe = await newRecipe.save();
         res.json(recipe);
@@ -45,6 +66,13 @@ export const updateRecipe = async (req, res) => {
             { new: true }
         );
 
+        if (req.file) {
+            const { filename } = req.file;
+            recipe.setImgUrl(filename);
+        }
+
+        await recipe.save();
+
         res.json(recipe);
     } catch (err) {
         console.error(err.message);
@@ -60,7 +88,7 @@ export const deleteRecipe = async (req, res) => {
             return res.status(404).json({ msg: 'Receta no encontrada' });
         }
 
-        await Recipe.findByIdAndRemove(req.params.id);
+        await Recipe.findByIdAndDelete(req.params.id);
 
         res.json({ msg: 'Receta eliminada' });
     } catch (err) {
