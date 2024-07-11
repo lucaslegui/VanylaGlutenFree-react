@@ -62,5 +62,11 @@ Las herramientas de desarrollo utilizadas incluyen:
 3. Instala las dependencias utilizando `npm install`.
 4. Inicia la aplicación con `npm run dev`.
 
+## LOGIN PARA ADMIN
+vanyla@vanyla.com
+12345678
+
+#### Deployar la base de datos en MongoDB desde la carpeta BACKUP-BASE-DE-DATOS-MONGODB antes de ejecutar el proyecto.
+
 
 <3
