@@ -6,6 +6,7 @@ import {RecipesComponent} from "./components/RecipesComponent.jsx";
 import {Home, Register, Login, UsersTable, EditUser, ProductsCreate, ProductsList, EditProduct, RecipeList, RecipeCreate, RecipeEdit, CoursesList, EditCourse, CourseCreate} from "./pages/index.js";
 import {FooterComponent} from "./components/FooterComponenet.jsx";
 import ProtectedRoutes from "./utils/ProtectedRoutes.jsx";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {

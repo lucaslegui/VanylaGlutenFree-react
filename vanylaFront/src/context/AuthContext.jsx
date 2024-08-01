@@ -26,8 +26,12 @@ export const AuthContextProvider = ({ children }) => {
         navigate('/login');
     };
 
+    const isAuthenticatedUser = () => {
+        return user && user.role === 'user';
+    };
+
     return (
-        <AuthContext.Provider value={{ user, setUser, auth, logout }}>
+        <AuthContext.Provider value={{ user, setUser, auth, isAuthenticatedUser ,logout }}>
             {children}
         </AuthContext.Provider>
     );

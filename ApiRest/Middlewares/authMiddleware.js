@@ -12,7 +12,7 @@ const authMiddleware = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded.user;
     const user = await User.findById(req.user.id);
-    if (!user || user.role !== 'admin') {
+    if (!user || user.role !== 'admin' ) {
       return res.status(403).json({ msg: 'Authorization denied' });
     }
     next();

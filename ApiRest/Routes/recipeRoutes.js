@@ -19,7 +19,7 @@ router.get('/', getRecipes);
 router.get('/:id', getRecipeById);
 
 // Create new recipe
-router.post('/', authMiddleware, roleMiddleware(['admin']), upload.single('image'), createRecipe);
+router.post('/', upload.single('image'), createRecipe);
 
 // Update recipe
 router.put('/:id', authMiddleware, roleMiddleware(['admin']), upload.single('image'), updateRecipe);

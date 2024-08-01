@@ -1,18 +1,33 @@
 import React, {useContext} from 'react';
 import {NavLink} from "react-router-dom";
 import {AuthContext} from "../context/AuthContext";
+import Cupcake from "./cupcake.jsx";
 
 const Navbar = () => {
     const {user, logout} = useContext(AuthContext);
     return (
         <>
             <header>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+
+                    height: '300px',
+
+                    backgroundColor: '#f8f8f8',
+
+                }}>
+                    <Cupcake/>
+                    <img src="./assets/img/logo_letras.png" alt="logo"/>
+                </div>
+
                 <nav className="navbar navbar-expand-lg navbar-custom">
                     <div className="container-fluid">
                         <a className="navbar-brand" href="/">
                             <img src='./assets/img/logo_fondo.png' alt="logo" width="90" height="90" className='logo'/>
                         </a>
-                {user?.name ? <p>Hola, {user.name}</p> : <p>no estas logueado</p>}
+                        {user?.name ? <p>Hola, {user.name}</p> : <p>no estas logueado</p>}
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                                 aria-label="Toggle navigation">
@@ -41,7 +56,7 @@ const Navbar = () => {
                                 )}
                                 {!user && <>
                                     <li className="nav-item">
-                                    <NavLink className="nav-link" to='/login'>LOGIN</NavLink>
+                                        <NavLink className="nav-link" to='/login'>LOGIN</NavLink>
                                     </li>
                                     <li className="nav-item">
                                         <NavLink className="nav-link" to='/register'>REGISTER</NavLink>

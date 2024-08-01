@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from "../api/axios.js";
-import {RecipesComponent} from "../components/RecipesComponent.jsx";
+import { RecipesComponent } from "../components/RecipesComponent.jsx";
 import {CoursesComponent} from "../components/CoursesComponenet.jsx";
-// import { Link } from 'react-router-dom';
+import { PostRecipe } from "../components/PostRecipe.jsx";
+import { AuthContext } from '../context/AuthContext';
 
 const Home = () => {
     const [products, setProducts] = useState([]);
+    const { isAuthenticatedUser } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -51,10 +53,10 @@ const Home = () => {
                 </div>
             </section>
             <RecipesComponent/>
+            {isAuthenticatedUser() && <PostRecipe />}
             <CoursesComponent/>
         </div>
     );
 };
 
-
-export {Home};
+export { Home };

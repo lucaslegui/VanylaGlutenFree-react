@@ -34,23 +34,34 @@ const RecipeList = () => {
     };
 
     return (
-        <div className="container mt-5">
-            <h2>Listado de Recetas</h2>
-            <div className="list-group">
-                {recipes.map((recipe) => (
-                    <div key={recipe._id} className="list-group-item list-group-item-action">
-                        <Link to={`/recipes/edit/${recipe._id}`}>
-                            <h5 className="mb-1">{recipe.title}</h5>
-                            <p>Ingredients: {recipe.ingredients.join(', ')}</p>
-                            <img src={recipe.image} alt={recipe.title} style={{width: '100px', height: '100px'}}/>
-                        </Link>
-                        <button onClick={() => handleDelete(recipe._id)} className="btn btn-danger">Eliminar</button>
+        <div className="container mt-4">
+            <h2 className="text-center text-primary mb-4">Listado de Recetas</h2>
+            {recipes.map((recipe, index) => (
+                <div className="card mb-3 shadow-sm" key={index} style={{borderRadius: '10px', overflow: 'hidden'}}>
+                    <div className="row g-0">
+                        <div className="col-md-3">
+                            <img src={recipe.image} alt={recipe.title} className="img-fluid"
+                                 style={{objectFit: 'cover', height: '100%', borderRadius: '10px 0 0 10px'}}/>
+                        </div>
+                        <div className="col-md-9">
+                            <div className="card-body">
+                                <div className="d-flex justify-content-between align-items-start">
+                                    <div> <Link to={`/recipes/edit/${recipe._id}`}>
+                                        <h5 className="card-title text-decoration-none mb-2">{recipe.title}</h5>
+                                    </Link>
+                                        <p className="card-text">
+                                            <strong>Ingredientes:</strong> {recipe.ingredients.join(', ')}</p>
+                                    </div>
+                                    <button className="btn btn-danger btn-sm" onClick={() => handleDelete(recipe._id)}>Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                ))}
-            </div>
-            <Link to="/recipes/create" className="btn btn-primary mt-3">Nueva Receta</Link>
+                </div>
+            ))}
         </div>
     );
 };
 
-export { RecipeList };
+export {RecipeList};

@@ -23,6 +23,7 @@ p {
 }
 
 /*navbar*/
+
 .navbar-custom {
     background-color: #f8f9fa;
     border-bottom: 1px solid #e0e0e0;
@@ -55,9 +56,6 @@ p {
     }
 }
 
-.logo {
-    animation: spin 5s linear infinite;
-}
 
 /*cards*/
 
